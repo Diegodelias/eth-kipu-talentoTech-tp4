@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./toasttr/toastr.min.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Make sure ethers is loaded first -->
+   <!-- <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.4/ethers.umd.min.js" integrity="sha512-V3xRGsQMQ8CG4l2gVN44TCDmNY5cdlxbSvejrgmWxcLKHft0Q3XQDbeuJ9aot14mpNuRWGtI//WKraedDGNZ+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">SimpleDex</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+              <ul class="navbar-nav me-auto">
+              <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Tokens</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Add liquidity</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Swap</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
+                    </li>
+                    -->
+                </ul>
+                <div class="d-flex">
+
+
+                    <button id="toggleButton" class="btn btn-secondary my- my-sm-0 btn-lg">Conectarse a
+                        metamask</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- cyborgtheme -->
+
+    <div class="container">
+        <div class="d-flex justify-content-center align-items-center mt-3" style="height: 100%;">
+
+            <div id="walletInfo">
+                <p>No hay una wallet conectada</p>
+                <div id="walletInfo"></div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+
+       
+            <div class="card text-white bg-primary mb-3 flex-fill" style="max-width: 48%;">
+                <div class="d-flex card-header d-flex card-header justify-content-between">Token A
+                    <div>
+                        <p class="card-text ">Balance: <span id="tokenABalance">Loading...</span></p>
+                    </div>
+                </div>
+                <div class="p-3">
+                    <p class="card-text mt-3">Token Address: <span id="tokenAAddress">Loading...</span></p>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Manage Token A</h4>
+                    <p class="card-text">Use the form below to interact with Token A.</p>
+
+                
+                    <form>
+
+                        
+                        <div class="mb-3">
+                            <label for="mintRecipientA" class="form-label">Recipient Address for Minting</label>
+                            <input type="text" class="form-control" id="mintRecipientA"
+                                placeholder="Enter recipient address">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="mintAmountA" class="form-label">Amount to Mint</label>
+                            <input type="number" class="form-control" id="mintAmountA"
+                                placeholder="Enter amount to mint">
+                        </div>
+
+
+          
+                        <button type="button" class="btn btn btn-info mb-3" id="mintButtonA">Mint</button>
+
+                  
+                        <div class="mb-3">
+                            <label for="spender" class="form-label">Spender Address</label>
+                            <input type="text" class="form-control" id="spender" placeholder="Enter spender address">
+                        </div>
+
+                    
+                        <div class="mb-3">
+                            <label for="value" class="form-label">Value</label>
+                            <input type="number" class="form-control" id="value" placeholder="Enter value to approve">
+                        </div>
+
+                 
+                        <button type="submit" class="btn btn-success mb-3" id="approveButtonA">Approve</button>
+
+
+
+
+
+
+
+
+
+                        <div class="mb-3">
+                            <label for="spender" class="form-label">Owner Address</label>
+                            <input type="text" class="form-control" id="spenderAllowanceA" placeholder="Enter owner address">
+                        </div>
+
+                    
+                        <div class="mb-3">
+                            <label for="value" class="form-label">Spender address</label>
+                            <input type="text" class="form-control" id="valueAllowanceA" placeholder="Enter spender address">
+                        </div>
+
+                 
+                        <button  class="btn btn-warning mb-3" id="allowanceButtonA">Allowance</button>
+
+       
+                        <div class="mb-3">
+                            <label for="transfer" class="form-label">Recipient Address</label>
+                            <input type="text" class="form-control" id="transferRecipientA" placeholder="Enter recipient address">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="transferAmountA" class="form-label">Amount to transfer</label>
+                            <input type="number" class="form-control" id="transferAmountA"
+                                placeholder="Enter amount to transfer">
+                        </div>
+
+            
+                        <button type="submit" class="btn btn-info mb-3" id="transferAmountBtn">Transfer</button>
+
+             
+                    
+                    
+             
+                      
+
+                        <button type="button" class="btn btn-secondary mb-3" id="balanceOfButton" data-bs-toggle="modal"
+                            data-bs-target="#balanceModal">Balance Of</button>
+                    </form>
+
+                </div>
+            </div>
+
+         
+
+
+            <!-- Modal for Balance Of -->
+            <div class="modal fade" id="balanceModal" tabindex="-1" aria-labelledby="balanceModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="balanceModalLabel">Token Balance</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Input for Address -->
+                            <div class="mb-3">
+                                <label for="balanceAddress" class="form-label">Enter Address</label>
+                                <input type="text" class="form-control" id="balanceAddress" placeholder="Enter address">
+                            </div>
+                            <!-- Display balance -->
+                            <div id="balanceResult">
+                                <p><strong>Balance:</strong> <span id="balanceValue"></span></p>
+                                <!-- <p><strong>Address:</strong> <span id="balanceAddressDisplay">Not Available</span></p> !-->
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="checkBalanceButton">Check Balance</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal fade" id="balanceModalB" tabindex="-1" aria-labelledby="balanceModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="balanceModalLabel">Token Balance</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Input for Address -->
+                        <div class="mb-3">
+                            <label for="balanceAddress" class="form-label">Enter Address</label>
+                            <input type="text" class="form-control" id="balanceAddressB" placeholder="Enter address">
+                        </div>
+                        <!-- Display balance -->
+                        <div id="balanceResult">
+                            <p><strong>Balance:</strong> <span id="balanceValueB"></span></p>
+                            <!-- <p><strong>Address:</strong> <span id="balanceAddressDisplay">Not Available</span></p> !-->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="checkBalanceButtonB">Check Balance</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="card text-white bg-primary mb-3 flex-fill" style="max-width: 48%;">
+                <div class="d-flex card-header d-flex card-header justify-content-between">Token B
+
+                    <div>
+                        <p class="card-text ">Balance: <span id="tokenBBalance">Loading...</span></p>
+                    </div>
+                </div>
+                <div class="p-3">
+
+                    <p class="card-text mt-3">Token Address: <span id="tokenBAddress">Loading...</span></p>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Manage Token B</h4>
+                    <p class="card-text">Use the form below to interact with Token B.</p>
+
+                    <!-- Form inside card body -->
+                    <form>
+                               <!-- Mint Input Fields -->
+                               <div class="mb-3">
+                                <label for="mintRecipient" class="form-label">Recipient Address for Minting</label>
+                                <input type="text" class="form-control" id="mintRecipientB"
+                                    placeholder="Enter recipient address">
+                            </div>
+                            <div class="mb-3">
+                                <label for="mintAmount" class="form-label">Amount to Mint</label>
+                                <input type="number" class="form-control" id="mintAmountB"
+                                    placeholder="Enter amount to mint">
+                            </div>
+    
+                            <!-- Mint Button -->
+                            <button type="button" class="btn btn btn-info mb-3" id="mintButtonB">Mint</button>
+                        <div class="mb-3">
+                            <label for="spender" class="form-label">Spender Address</label>
+                            <input type="text" class="form-control" id="spenderb" placeholder="Enter spender address">
+                        </div>
+
+                        <!-- Value Input -->
+                        <div class="mb-3">
+                            <label for="value" class="form-label">Value</label>
+                            <input type="number" class="form-control" id="valueb" placeholder="Enter value to approve">
+                        </div>
+
+                        <!-- Approve Button -->
+                        <button type="submit" class="btn btn-success mb-3" id="approveButtonB">Approve</button>
+
+                        
+
+                        <div class="mb-3">
+                            <label for="spender" class="form-label">Owner Address for allowance</label>
+                            <input type="text" class="form-control" id="spenderAllowanceB" placeholder="Enter owner address">
+                        </div>
+
+                    
+                        <div class="mb-3">
+                            <label for="value" class="form-label">Spender address for allowance</label>
+                            <input type="text" class="form-control" id="valueAllowanceB" placeholder="Enter spender address">
+                        </div>
+
+                 
+                        <button  class="btn btn-warning mb-3" id="allowanceButtonB">Allowance</button>
+
+              
+                 
+
+                        <div class="mb-3">
+                            <label for="transfer" class="form-label">Recipient Address</label>
+                            <input type="text" class="form-control" id="transferRecipientB" placeholder="Enter recipient address">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="transferAmountA" class="form-label">Amount to transfer</label>
+                            <input type="number" class="form-control" id="transferAmountB"
+                                placeholder="Enter amount to transfer">
+                        </div>
+
+            
+                        <button type="submit" class="btn btn-info mb-3" id="transferAmountB_Btn">Transfer</button>
+
+
+                        <!-- BalanceOf Button -->
+                        <button type="button" class="btn btn-secondary mb-3" id="balanceOfButton" data-bs-toggle="modal"
+                            data-bs-target="#balanceModalB">Balance Of</button>
+                    </form>
+
+                </div>
+            </div>
+
+
+
+            <div class="modal fade" id="balanceModal" tabindex="-1" aria-labelledby="balanceModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="balanceModalLabel">Token Balance</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="mb-3">
+                                <label for="balanceAddress" class="form-label">Enter Address</label>
+                                <input type="text" class="form-control" id="balanceAddress" placeholder="Enter address">
+                            </div>
+
+                            <div id="balanceResult">
+                                <p><strong>Balance:</strong> <span id="balanceValue"></span></p>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="checkBalanceButton">Check Balance</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        <div class="card-body card text-white bg-primary">
+            <h4 class="card-title">Manage Liquidity and Swaps</h4>
+            <p class="card-text">Use the forms below to interact with the DEX.</p>
+
+            <div>
+                <p class="card-text ">Reserve A: <span id="ReserveA">Loading...</span></p>
+            </div>
+
+            
+            <div>
+                <p class="card-text ">Reserve B: <span id="ReserveB">Loading...</span></p>
+            </div>
+
+            <!-- Add Liquidity Form -->
+            <form id="addLiquidityForm " class="mb-4 mt-3">
+                <h5>Add Liquidity</h5>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="amountA" class="form-label">Amount A</label>
+                        <input type="number" class="form-control" id="amountA" placeholder="Enter Amount A">
+                    </div>
+                    <div class="col">
+                        <label for="amountB" class="form-label">Amount B</label>
+                        <input type="number" class="form-control" id="amountB" placeholder="Enter Amount B">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-success" id="addLiquidityButton">Add Liquidity</button>
+            </form>
+
+            <!-- Remove Liquidity Form -->
+            <form id="removeLiquidityForm" class="mb-4">
+                <h5>Remove Liquidity</h5>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="removeAmountA" class="form-label">Amount A</label>
+                        <input type="number" class="form-control" id="removeAmountA" placeholder="Enter Amount A">
+                    </div>
+                    <div class="col">
+                        <label for="removeAmountB" class="form-label">Amount B</label>
+                        <input type="number" class="form-control" id="removeAmountB" placeholder="Enter Amount B">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-danger" id="removeLiquidityButton">Remove Liquidity</button>
+            </form>
+
+            <!-- Get Price Form -->
+            <form id="getPriceForm" class="mb-4">
+                <h5>Get Price</h5>
+                <div class="mb-3">
+                    <label for="priceAddress" class="form-label">Token Address</label>
+                    <input type="text" class="form-control" id="priceAddress" placeholder="Enter Token Address">
+                </div>
+                <button type="button" class="btn btn-info" id="getPriceButton">Get Price</button>
+            </form>
+
+            <!-- Swap A for B Form -->
+            <form id="swapAforBForm" class="mb-4">
+                <h5>Swap A for B</h5>
+                <div class="mb-3">
+                    <label for="swapAmountA" class="form-label">Amount A</label>
+                    <input type="number" class="form-control" id="swapAmountA" placeholder="Enter Amount A">
+                </div>
+                <button type="button" class="btn btn-warning" id="swapAforBButton">Swap A for B</button>
+            </form>
+
+            <!-- Swap B for A Form -->
+            <form id="swapBforAForm">
+                <h5>Swap B for A</h5>
+                <div class="mb-3">
+                    <label for="swapAmountB" class="form-label">Amount B</label>
+                    <input type="number" class="form-control" id="swapAmountB" placeholder="Enter Amount B">
+                </div>
+                <button type="button" class="btn btn-secondary" id="swapBforAButton">Swap B for A</button>
+            </form>
+        </div>
+
+
+    </div>
+
+
+
+
+</body>
+
+<!-- Load your scripts AFTER ethers is included -->
+<script src="main.js"></script>
+<script src="./toasttr/"></script>
+
+</html>
