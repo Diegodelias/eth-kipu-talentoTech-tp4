@@ -11,13 +11,15 @@ Link a front en NETLIFY
 
 https://675f44b12595e41cf6fc0353--thunderous-faun-811f07.netlify.app/
 
+En caso de no actualice boton conectar y desconectar metamask hacer refresh de la pagina
 
-![](imagenes/1.png)
 
-![](imagenes/2.png)
+![](frontEnd/imagenes/1.png)
 
-![](imagenes/3.png)
+![](frontEnd/imagenes/2.png)
 
-![](imagenes/4.png)
+![](frontEnd/imagenes/3.png)
+
+![](frontEnd/imagenes/4.png)
     
     
